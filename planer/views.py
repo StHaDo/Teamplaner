@@ -23,7 +23,13 @@ def project_list(request):
 
 
 def project_detail(request, pk):
-    pass
+    project = models.Project.objects.get(pk=pk)
+
+    context = {
+        'project': project,
+    }
+
+    return render(request, 'planer/project/project_detail.html', context)
 
 
 def project_new(request):
@@ -32,8 +38,12 @@ def project_new(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('projects')
+            project = form.save(commit=False)
+            if project.end != None:
+                project.duration = project.end - project.start
+                project.save()
+            project.save()
+            return redirect('project_detail', pk=project.id)
 
     context = {
         'form': form,
@@ -51,7 +61,11 @@ def project_update(request, pk):
     if request.method == 'POST':
         form = ProjectForm(request.POST, instance=project)
         if form.is_valid():
-            form.save()
+            project = form.save(commit=False)
+            if project.end != None:
+                project.duration = project.end - project.start
+                project.save()
+            project.save()
             return redirect('projects')
 
     context = {

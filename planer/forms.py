@@ -14,4 +14,3 @@ class ProjectForm(forms.ModelForm):
             'start': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'end': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
-        localized_fields = ('start', 'end')
