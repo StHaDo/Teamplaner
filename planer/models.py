@@ -38,12 +38,11 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
-    def set_date_if_completed(completed: bool):
+    def set_date_if_completed(self):
 
-        if completed:
+        if self.completed:
             date_completed: date = date.today()
-
-        return date_completed
+            return date_completed
 
 
 class Comments(models.Model):
