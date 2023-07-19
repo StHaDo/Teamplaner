@@ -15,6 +15,8 @@ class Project(models.Model):
     duration = models.DurationField(
         verbose_name='Projektdauer', blank=True, null=True)
 
+    projects = models.Manager()
+
     def __str__(self):
         return self.name
 
@@ -37,6 +39,8 @@ class Task(models.Model):
     duration = models.DurationField(blank=True, null=True)
     completed = models.BooleanField(default=False)
 
+    tasks = models.Manager()
+
     def __str__(self):
         return self.name
 
@@ -53,3 +57,8 @@ class Comments(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, blank=True, null=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    comments = models.Manager()
+
+    def __str__(self) -> str:
+        return (f'{self.user.username} - {self.task.name}')

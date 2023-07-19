@@ -1,10 +1,12 @@
 {% extends 'base.html' %} {% block title %}Project Detail{% endblock title %} {% block main_content %}
 <div class="container">
-  <h1>Details for {{project}}</h1>
-  <h3 class="text-secondary">Beschreibung</h3>
+  <h1 class="border-bottom border-info-subtle">Details for {{project}}</h1>
+  <small class="text-black-50">Angelegt am: {{project.created_on}}</small>
+  <h2 class="mt-3">Beschreibung</h2>
   <p>{{project.description}}</p>
   <p><strong>Projektstart:</strong> {{project.start}}</p>
   <p><strong>Projekabschluss:</strong> {{project.end}}</p>
   <p><strong>Dauer:</strong> {{project.duration.days}} Tage</p>
+  <a class="btn btn-success" href="{% url 'project_update' project.id %}">Bearbeiten</a>
 </div>
 {% endblock main_content %}

@@ -13,7 +13,7 @@ def home(request):
 
 # Projects
 def project_list(request):
-    projects = models.Project.objects.all()
+    projects = models.Project.projects.all()
 
     context = {
         'projects': projects,
@@ -23,7 +23,7 @@ def project_list(request):
 
 
 def project_detail(request, pk):
-    project = models.Project.objects.get(pk=pk)
+    project = models.Project.projects.get(pk=pk)
 
     context = {
         'project': project,
@@ -55,7 +55,7 @@ def project_new(request):
 
 
 def project_update(request, pk):
-    project = models.Project.objects.get(pk=pk)
+    project = models.Project.projects.get(pk=pk)
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':
